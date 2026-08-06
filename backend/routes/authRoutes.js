@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
-    }    const token = jwt.sign({ userId: user._id, role: user.role, clinic: user.clinic }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
+    } const token = jwt.sign({ userId: user._id, role: user.role, clinic: user.clinic }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
     res.json({ token, user: { name: user.name, email: user.email, role: user.role, clinic: user.clinic, profilePic: user.profilePic } });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -101,17 +101,17 @@ router.put('/update-profile', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
-    }    user.name = name;
+    } user.name = name;
     if (profilePic) user.profilePic = profilePic;
     await user.save();
-    res.json({ 
+    res.json({
       message: 'Profile updated successfully',
-      user: { 
-        name: user.name, 
-        email: user.email, 
-        role: user.role, 
-        clinic: user.clinic, 
-        profilePic: user.profilePic 
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        clinic: user.clinic,
+        profilePic: user.profilePic
       }
     });
   } catch (err) {
