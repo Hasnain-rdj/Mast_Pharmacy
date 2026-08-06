@@ -1,0 +1,137 @@
+/* d:\Coding\Mast Pharmacy\frontend\src\components\admin\AdminSalesModule.css */
+/* Base styles for the sales module */
+.admin-sales-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3f6fa 60%, #e3eaf2 100%);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-sales-content {
+  max-width: 1440px;
+  margin-top: 100px;
+  width: 100%;
+}
+
+.admin-sales-heading {
+  color: #1976d2;
+  font-weight: 900;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 32px;
+}
+
+.admin-sales-toolbar {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-sales-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.admin-sales-table-container {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.07);
+  overflow-x: auto;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.admin-sales-search {
+  margin-bottom: 18px;
+  max-width: 400px;
+}
+
+.admin-sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 16px;
+  font-size: 17px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .admin-sales-heading {
+    font-size: 24px;
+  }
+  
+  .admin-sales-table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  .admin-sales-table {
+    min-width: 600px;
+    font-size: 14px;
+  }
+  
+  .admin-sales-table th,
+  .admin-sales-table td {
+    padding: 10px;
+  }
+  
+  .admin-sales-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .admin-sales-table .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .admin-sales-table button {
+    padding: 5px 10px !important;
+    font-size: 13px !important;
+    width: 100%;
+  }
+  
+  .admin-sales-table th:nth-child(5),
+  .admin-sales-table td:nth-child(5),
+  .admin-sales-table th:nth-child(6),
+  .admin-sales-table td:nth-child(6) {
+    display: none;
+  }
+}
+
+/* Table row hover effect */
+.admin-sales-table tbody tr:hover {
+  background-color: #f5f8fc;
+}
+
+/* Responsive date picker */
+.custom-date-input {
+  min-width: 160px;
+  border-radius: 8px;
+  border: 1.5px solid #1976d2;
+  background: #f3f6fa;
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 14px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+}
+
+@media (max-width: 576px) {
+  .custom-date-input {
+    min-width: 120px;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}

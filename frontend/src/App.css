@@ -1,0 +1,262 @@
+/* Bold font styles */
+.bold-font,
+.bold-font p,
+.bold-font h1, 
+.bold-font h2, 
+.bold-font h3, 
+.bold-font h4, 
+.bold-font h5, 
+.bold-font h6,
+.bold-font a,
+.bold-font span,
+.bold-font div,
+.bold-font td,
+.bold-font th,
+.bold-font li,
+.bold-font button,
+.bold-font input,
+.bold-font label,
+.bold-font select,
+.bold-font option {
+  font-weight: bold !important;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Light theme styles */
+
+/* Light theme styles */
+
+.auth-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1001;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
+
+.input-group input,
+.input-group select {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+}
+
+button[type='submit'] {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button[type='submit']:hover {
+  background: #125ea2;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: #388e3c;
+  font-size: 0.9rem;
+}
+
+/* Global Responsive Styles */
+body, #root, .App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3f6fa 60%, #e3eaf2 100%);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Add top padding for fixed navbar height (adjust if navbar height changes) */
+.main-content, .container, .container-fluid {
+  padding-top: 90px !important;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .main-content, .container, .container-fluid {
+    padding-top: 100px !important;
+  }
+}
+
+/* Container for all pages */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Table Responsive Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  /* Improved responsive styles for small screens */
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  
+  .col, [class*="col-"] {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  td, th {
+    padding: 0.5rem;
+  }
+
+  .auth-container {
+    margin: 20px auto;
+    padding: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  td, th {
+    padding: 0.4rem;
+    font-size: 0.9rem;
+  }
+
+  .auth-container {
+    margin: 10px auto;
+    padding: 1rem;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Utility Classes */
+.main-action-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.main-action-btn:hover {
+  background: #1565c0;
+  transform: translateY(-1px);
+}
+
+@media screen and (max-width: 768px) {
+  .main-action-btn {
+    width: 100%;
+    padding: 0.7rem 1rem;
+  }
+}

@@ -1,0 +1,29 @@
+/* Font size is controlled by SettingsContext */
+html {
+  font-size: 16px; /* Default will be overridden by settings */
+  transition: font-size 0.3s ease;
+}
+
+/* Firefox compatibility for scaling */
+@supports (-moz-appearance:none) {
+  body.scale-down {
+    transform: scale(0.9);
+    transform-origin: 0 0;
+    width: 110%;
+    min-height: 110vh;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
