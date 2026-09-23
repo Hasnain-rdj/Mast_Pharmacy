@@ -232,3 +232,68 @@ export const getFontSizeValue = (size) => {
     default: return '1rem';
   }
 };
+
+// Calculate remaining days until expiry date
+export const getDaysUntilExpiry = (expiryDate) => {
+  if (!expiryDate) return null;
+  const exp = new Date(expiryDate);
+  if (isNaN(exp.getTime())) return null;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // If expiryDate is a string in YYYY-MM-DD format (or ISO string starting with YYYY-MM-DD),
+  // extract year, month, day directly to avoid any timezone shifts
+  let year, month, day;
+  if (typeof expiryDate === 'string' && /^\d{4}-\d{2}-\d{2}/.test(expiryDate)) {
+    const parts = expiryDate.substring(0, 10).split('-');
+    year = parseInt(parts[0], 10);
+    month = parseInt(parts[1], 10) - 1;
+    day = parseInt(parts[2], 10);
+  } else {
+    year = exp.getFullYear();
+    month = exp.getMonth();
+    day = exp.getDate();
+  }
+
+  const expDate = new Date(year, month, day);
+  const diffTime = expDate.getTime() - today.getTime();
+  return Math.round(diffTime / (1000 * 60 * 60 * 24));
+};
+
+// Format expiry date with days left or expired status
+export const formatExpiryDate = (expiryDate) => {
+  if (!expiryDate) return '-';
+  const exp = new Date(expiryDate);
+  if (isNaN(exp.getTime())) return '-';
+
+  // Format date as DD/MM/YYYY
+  let formattedDate;
+  if (typeof expiryDate === 'string' && /^\d{4}-\d{2}-\d{2}/.test(expiryDate)) {
+    const [y, m, d] = expiryDate.substring(0, 10).split('-');
+    formattedDate = `${d}/${m}/${y}`;
+  } else {
+    formattedDate = exp.toLocaleDateString('en-GB');
+  }
+
+  const daysLeft = getDaysUntilExpiry(expiryDate);
+  if (daysLeft === null) return formattedDate;
+
+  if (daysLeft < 0) {
+    return `${formattedDate} (Expired)`;
+  }
+  if (daysLeft === 0) {
+    return `${formattedDate} (Expires today)`;
+  }
+  if (daysLeft === 1) {
+    return `${formattedDate} (1 day left)`;
+  }
+  return `${formattedDate} (${daysLeft} days left)`;
+};
+
+// Check if a medicine is expiring soon (default: within 90 days, or already expired)
+export const isExpiringSoon = (expiryDate, thresholdDays = 90) => {
+  const daysLeft = getDaysUntilExpiry(expiryDate);
+  return daysLeft !== null && daysLeft <= thresholdDays;
+};
+

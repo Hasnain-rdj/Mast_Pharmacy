@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaSearch, FaList, FaPills, FaSort, FaSortUp, FaSortDown, FaExchangeAlt } from 'react-icons/fa';
 import './Auth.css';
 import API from '../api';
-import { getStoredUser } from '../utils';
+import { getStoredUser, formatExpiryDate, isExpiringSoon } from '../utils';
 import { useSettings } from './context/SettingsContext';
 import LoadingSpinner from './common/LoadingSpinner';
 
@@ -113,9 +113,12 @@ const ClinicInventory = () => {
           ? a.quantity - b.quantity
           : b.quantity - a.quantity;
       } else if (sortField === 'expiryDate') {
+        if (!a.expiryDate && !b.expiryDate) return 0;
+        if (!a.expiryDate) return 1;
+        if (!b.expiryDate) return -1;
         return sortDirection === 'asc'
-          ? new Date(a.expiryDate || 0) - new Date(b.expiryDate || 0)
-          : new Date(b.expiryDate || 0) - new Date(a.expiryDate || 0);
+          ? new Date(a.expiryDate) - new Date(b.expiryDate)
+          : new Date(b.expiryDate) - new Date(a.expiryDate);
       }
       return 0;
     });
@@ -531,8 +534,13 @@ const ClinicInventory = () => {
                             {med.purchasePrice ? `${med.purchasePrice} Rs` : '-'}
                           </td>
                         )}
-                        <td style={{ padding: 16, textAlign: 'center', color: med.expiryDate && new Date(med.expiryDate) <= new Date(Date.now() + 1000*60*60*24*90) ? '#d32f2f' : undefined, fontWeight: med.expiryDate && new Date(med.expiryDate) <= new Date(Date.now() + 1000*60*60*24*90) ? 700 : undefined }}>
-                          {med.expiryDate ? `${new Date(med.expiryDate).toLocaleDateString('en-GB')} (${Math.max(0, Math.ceil((new Date(med.expiryDate) - new Date('2025-06-10')) / (1000*60*60*24)))} days left)` : '-'}
+                        <td style={{
+                          padding: 16,
+                          textAlign: 'center',
+                          color: isExpiringSoon(med.expiryDate) ? '#d32f2f' : undefined,
+                          fontWeight: isExpiringSoon(med.expiryDate) ? 700 : undefined
+                        }}>
+                          {formatExpiryDate(med.expiryDate)}
                         </td>
                       </tr>
                     ))

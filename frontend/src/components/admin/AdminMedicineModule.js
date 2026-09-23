@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../api';
 import { FaPills, FaPlus, FaClinicMedical, FaSearch, FaEdit, FaChartBar, FaTrash, FaTimesCircle } from 'react-icons/fa';
+import { formatExpiryDate, isExpiringSoon } from '../../utils';
 import '../Auth.css';
 
 const AdminMedicineModule = () => {  const [medicines, setMedicines] = useState([]);
@@ -352,8 +353,13 @@ const AdminMedicineModule = () => {  const [medicines, setMedicines] = useState(
                     <td style={{ padding: '10px 12px' }}>{med.name}</td>
                     <td style={{ padding: '10px 12px' }}>{med.quantity}</td>
                     <td style={{ padding: '10px 12px' }}>{med.purchasePrice}</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'center', color: med.expiryDate && new Date(med.expiryDate) <= new Date(Date.now() + 1000*60*60*24*90) ? '#d32f2f' : undefined, fontWeight: med.expiryDate && new Date(med.expiryDate) <= new Date(Date.now() + 1000*60*60*24*90) ? 700 : undefined }}>
-                      {med.expiryDate ? `${new Date(med.expiryDate).toLocaleDateString('en-GB')} (${Math.max(0, Math.ceil((new Date(med.expiryDate) - new Date('2025-06-10')) / (1000*60*60*24)))} days left)` : '-'}
+                    <td style={{
+                      padding: '10px 12px',
+                      textAlign: 'center',
+                      color: isExpiringSoon(med.expiryDate) ? '#d32f2f' : undefined,
+                      fontWeight: isExpiringSoon(med.expiryDate) ? 700 : undefined
+                    }}>
+                      {formatExpiryDate(med.expiryDate)}
                     </td>
                     <td style={{ padding: '10px 12px' }}>{med.clinic}</td>
                     <td style={{ padding: '10px 12px' }}>
